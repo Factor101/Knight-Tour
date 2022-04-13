@@ -7,14 +7,20 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main
 {
     public static void main(String[] args)
     {
+        final int size = 8;
+        final int xStart = randInt(0, size - 1);
+        final int yStart = randInt(0, size - 1);
+
+        System.out.println("Starting at: ( " + String.format("%02d", xStart) + ", " + String.format("%02d",yStart) + " )");
         // initialize board and knight
-        final Board board = new Board();
-        final Knight knight = new Knight(0, 0, board);
+        final Board board = new Board(size);
+        final Knight knight = new Knight(xStart, yStart, board);
 
         // initialize knight property of PossibleMove class
         PossibleMove.knight = knight;
@@ -29,7 +35,7 @@ public class Main
             // sort them in ascending order
             List<PossibleMove> possibleMoves = Arrays.stream(legalMoves)
                     .map(PossibleMove::new)
-                    .sorted(Comparator.comparingInt(a -> a.legalMovesFrom))
+                    .sorted(Comparator.comparingInt(e -> e.legalMovesFrom))
                     .collect(Collectors.toList());
 
             // move our knight to the best possible square
@@ -41,6 +47,10 @@ public class Main
 
         board.print();
         System.out.println("Total moves: " + (knight.getMoveAmount()));
+    }
+    public static int randInt(int min, int max)
+    {
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 }
 

@@ -3,13 +3,15 @@ package Chess;
 public class Board
 {
     // dimensions of our board
-    private final static int size = 8;
+    private final int size;
+    private final Square[][] squares;
 
-    // initialize board squares
-    private final Square[][] squares = new Square[size][size];
-
-    public Board()
+    public Board(int size)
     {
+        this.size = size;
+        // initialize board squares
+        squares = new Square[size][size];
+
         // populate board with new Squares
         for(int i = 0; i < size; i++)
         {
