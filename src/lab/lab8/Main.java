@@ -4,6 +4,7 @@ import Chess.Board;
 import Chess.Knight;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class Main
             // sort them in ascending order
             List<PossibleMove> possibleMoves = Arrays.stream(legalMoves)
                     .map(PossibleMove::new)
-                    .sorted((a, b) -> a.legalMovesFrom - b.legalMovesFrom)
+                    .sorted(Comparator.comparingInt(a -> a.legalMovesFrom))
                     .collect(Collectors.toList());
 
             // move our knight to the best possible square
