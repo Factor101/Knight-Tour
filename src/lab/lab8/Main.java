@@ -14,10 +14,14 @@ public class Main
     public static void main(String[] args)
     {
         final int size = 8;
+
+        // randomize starting position
         final int xStart = randInt(0, size - 1);
         final int yStart = randInt(0, size - 1);
 
+        // print starting position
         System.out.println("Starting at: ( " + String.format("%02d", xStart) + ", " + String.format("%02d",yStart) + " )");
+
         // initialize board and knight
         final Board board = new Board(size);
         final Knight knight = new Knight(xStart, yStart, board);
